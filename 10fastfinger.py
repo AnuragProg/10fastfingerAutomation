@@ -23,7 +23,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.common.exceptions import NoSuchElementException
-
+from selenium.webdriver.common.by import By
 
 website = "https://10fastfingers.com/typing-test/english"
 
@@ -44,7 +44,7 @@ def opening_website():
 def checking_cookie_messages():
     driver.implicitly_wait(10)
     try :
-        cookie_button = driver.find_element_by_id("CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll")
+        cookie_button = driver.find_element("id","CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll")
         cookie_button.click()
     except NoSuchElementException:
         pass
@@ -54,10 +54,10 @@ def checking_cookie_messages():
 def fetching_words():
     while True:
         try:
-            word = driver.find_element_by_class_name("highlight")
+            word = driver.find_element(By.CLASS_NAME,"highlight")
             word = word.text
             print(word) #debugging purpose
-            input_field = driver.find_element_by_id("inputfield")
+            input_field = driver.find_element("id","inputfield")
             input_field.send_keys(word + " ")
             driver.implicitly_wait(1)
 
